@@ -5,7 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var userRouter = require('./routes/user');
+var eventRouter = require('./routes/event');
+var itemRouter = require('./routes/item');
+var quizRouter = require('./routes/quiz');
+var roleRouter = require('./routes/role');
+
+var loginRouter = require('./routes/login');
+
 var uploadsRouter = require('./routes/uploads');
 var ocrRouter = require('./routes/ocr');
 
@@ -22,7 +29,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
+app.use('/event', eventRouter);
+app.use('/item', itemRouter);
+app.use('/quiz', quizRouter);
+app.use('/role', roleRouter);
+app.use('/login', loginRouter);
+
+//endpoint android & skripsi
 app.use('/uploads', uploadsRouter);
 app.use('/ocr', ocrRouter);
 
