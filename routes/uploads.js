@@ -7,7 +7,7 @@ const multer = require('multer');
 const upload = multer({dest: __dirname + '/uploads'});
 const fs = require("fs")
 const path = require("path")
-
+var { createWorker } = require('tesseract.js');
 var pool = require('../db/pool')
 
 router.get('/', (req, res) => {
@@ -25,12 +25,26 @@ router.post('/', upload.single('photo'), (req, res) => {
         fs.rename(tempPath, targetPath, err => {
             if (err) console.log(err)
 
-            pool.query(`UPDATE users SET profile_image='${req.file.originalname}' WHERE id='${1}'`, (error, results) => {
-                if (error) {
-                    console.log(error)
-                }
-                res.status(200).send("HELLO")
-            })
+            // pool.query(`UPDATE users SET profile_image='${req.file.originalname}' WHERE id='${1}'`, (error, results) => {
+            //     if (error) {
+            //         console.log(error)
+            //     }
+            // })
+
+            // const worker = createWorker({
+            //     logger: m => console.log(m)
+            //     });
+            
+            //     (async () => {
+            //         await worker.load();
+            //         await worker.loadLanguage('eng');
+            //         await worker.initialize('eng');
+            //         const { data: { text } } = await worker.recognize('https://tesseract.projectnaptha.com/img/eng_bw.png');
+            //         console.log(text);
+            //         await worker.terminate();
+            //     })();
+
+            res.status(200).send(text)
         })
     }else{
         res.status(400).send("ERROR SOMETHING NOT WORKING")
